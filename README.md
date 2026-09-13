@@ -250,6 +250,41 @@ print(texts)
 ✓ 预测: 8.80                                    | 真实: 8.80
 ```
 
+## 预训练模型
+
+训练好的模型权重已发布到 ModelScope：
+
+| 模型 | 平台 | 链接 |
+|------|------|------|
+| CRNN-v2 | ModelScope | [Brilliantccc/OCR-CRNN-v2](https://www.modelscope.cn/models/Brilliantccc/OCR-CRNN-v2) |
+
+### 快速使用
+
+```python
+from modelscope.pipelines import pipeline
+
+ocr = pipeline('ocr', model='Brilliantccc/OCR-CRNN-v2')
+result = ocr('path/to/receipt.jpg')
+print(result)
+```
+
+或手动加载模型权重：
+
+```python
+import torch
+from model import CRNN
+from utils import load_checkpoint, decode_output
+
+# 从 ModelScope 下载模型后
+model = CRNN()
+load_checkpoint(model, None, "best_model.pth")
+model.eval()
+
+with torch.no_grad():
+    outputs = model(images)
+    texts = decode_output(outputs)
+```
+
 ## 参考资料
 
 - [CRNN 论文](https://arxiv.org/abs/1507.05717) — *An End-to-End Trainable Neural Network for Image-based Sequence Recognition*
