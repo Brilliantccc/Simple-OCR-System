@@ -25,7 +25,8 @@ venv/
 dist/
 build/
 
-# IDE
+# IDE / 工具
+.codegraph/
 .vscode/
 .idea/
 *.swp
